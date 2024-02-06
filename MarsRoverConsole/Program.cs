@@ -13,19 +13,28 @@ namespace MarsRoverConsole
             consolePresenter.InjectMarsRover(new MarsRoverController(consolePresenter));
 
             Console.WriteLine("Mars Rover Project");
+            Console.WriteLine("Leave Command Blank to submit currently queued commands.");
 
             bool running = true;
             while (running)
             {
                 try
                 {
+                    Console.Write("Command: ");
                     string input = Console.ReadLine();
-                    string output = consolePresenter.Input(input);
-                    if (output != "")
+                    if (input.ToLower() == "quit" || input.ToLower() == "exit")
                     {
-                        foreach (string outputLine in output.Split(Environment.NewLine))
+                        running = false;
+                    }
+                    else
+                    {
+                        string output = consolePresenter.Input(input);
+                        if (output != "")
                         {
-                            Console.WriteLine(outputLine);
+                            foreach (string outputLine in output.Split(Environment.NewLine))
+                            {
+                                Console.WriteLine(outputLine);
+                            }
                         }
                     }
                 }

@@ -44,6 +44,8 @@ namespace MarsRoverConsoleLibrary
                 bool commandIsNumber = int.TryParse(travelDistance, out int distance);
                 if (commandIsNumber)
                     marsRoverCommands.TravelCommand(distance);
+                else
+                    return false;
                 return true;
             }
             return false;
@@ -59,7 +61,9 @@ namespace MarsRoverConsoleLibrary
         {
             if (locationReport == "")
                 return "";
-            return "position " + locationReport + " " + directionReport; 
+            string location = "position " + locationReport + " " + directionReport;
+            locationReport = "";
+            return location;
         }
 
         string ConvertRoverDirectionToString(MarsRoverDirection direction)
